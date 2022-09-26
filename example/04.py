@@ -38,3 +38,9 @@ def summation(n, term):
     while k <= n:
         total, k = total + term(k), k + 1
     return total 
+
+#
+def make_adders(k):
+    def adder(n):
+        return k + n
+    return adder
