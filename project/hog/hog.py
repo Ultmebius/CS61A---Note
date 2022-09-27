@@ -68,6 +68,10 @@ def take_turn(num_rolls, opponent_score, dice=six_sided, goal=GOAL_SCORE):
     assert opponent_score < goal, 'The game should be over.'
     # BEGIN PROBLEM 3
     "*** YOUR CODE HERE ***"
+    if num_rolls != 0:
+        return roll_dice(num_rolls, dice)
+    else:
+        return picky_piggy(opponent_score)
     # END PROBLEM 3
 
 
@@ -79,6 +83,10 @@ def hog_pile(player_score, opponent_score):
     """
     # BEGIN PROBLEM 4
     "*** YOUR CODE HERE ***"
+    if player_score == opponent_score:
+        return player_score
+    else:
+        return 0
     # END PROBLEM 4
 
 
@@ -118,6 +126,30 @@ def play(strategy0, strategy1, score0=0, score1=0, dice=six_sided,
     who = 0  # Who is about to take a turn, 0 (first) or 1 (second)
     # BEGIN PROBLEM 5
     "*** YOUR CODE HERE ***"
+    """  while score0 < goal and who == 0:
+        num_dice = strategy0(score0, score1)
+        score0 = score0 + take_turn(num_dice, score1, dice, goal)
+        score0 = score0 + hog_pile(score0, score1)
+        who = next_player(who)
+        if score1 < goal and who == 1:
+            num_dice = strategy1(score1, score0)
+            score1 = score1 + take_turn(num_dice, score0, dice, goal)
+            score1 = score1 + hog_pile(score1, score0)
+            who = next_player(who)
+        else:
+            break """
+    while score0 < goal and score1 < goal:
+        if who == 0:
+            num_dice = strategy0(score0, score1)
+            turn_score = take_turn(num_dice, score1, dice, goal)
+            score0 += turn_score
+            score0 += hog_pile(score0, score1)
+        else:
+            num_dice = strategy1(score1, score0)
+            turn_score = take_turn(num_dice, score0, dice, goal)
+            score1 += turn_score
+            score1 += hog_pile(score1, score0)
+        who = next_player(who)
     # END PROBLEM 5
     # (note that the indentation for the problem 6 prompt (***YOUR CODE HERE***) might be misleading)
     # BEGIN PROBLEM 6
