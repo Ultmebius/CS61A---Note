@@ -26,7 +26,17 @@ test = {
         },
         {
           'code': r"""
-          >>> take_turn(0, 41)
+          >>> take_turn(0, 2)
+          edcbd82ba98a8122be244fa325c62071
+          # locked
+          """,
+          'hidden': False,
+          'locked': True,
+          'multiline': False
+        },
+        {
+          'code': r"""
+          >>> take_turn(0, 0)
           c42887e7b9ffe8fc26bb57b61329f916
           # locked
           """,
@@ -36,17 +46,8 @@ test = {
         },
         {
           'code': r"""
-          >>> take_turn(0, 15)
-          9
-          """,
-          'hidden': False,
-          'locked': False,
-          'multiline': False
-        },
-        {
-          'code': r"""
-          >>> take_turn(0, 21)
-          3
+          >>> take_turn(0, 1)
+          1
           """,
           'hidden': False,
           'locked': False,
