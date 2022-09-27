@@ -22,6 +22,17 @@ def roll_dice(num_rolls, dice=six_sided):
     assert num_rolls > 0, 'Must roll at least once.'
     # BEGIN PROBLEM 1
     "*** YOUR CODE HERE ***"
+    points = 0
+    sow_sad = False
+    for i in range(num_rolls):
+        now_point = dice();
+        if now_point == 1:
+            sow_sad = True
+        points += now_point
+    if sow_sad == False:
+        return points
+    else:
+        return 1
     # END PROBLEM 1
 
 
@@ -32,6 +43,11 @@ def picky_piggy(score):
     """
     # BEGIN PROBLEM 2
     "*** YOUR CODE HERE ***"
+    score = score % 6
+    if score != 0:
+        return 142857 // pow(10, (6 - score)) % 10
+    else:
+        return 7
     # END PROBLEM 2
 
 

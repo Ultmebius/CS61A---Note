@@ -7,21 +7,19 @@ test = {
         {
           'code': r"""
           >>> roll_dice(2, make_test_dice(4, 6, 1))
-          70e71b420a966665c548a3bb2cb30d7d
-          # locked
+          10
           """,
           'hidden': False,
-          'locked': True,
+          'locked': False,
           'multiline': False
         },
         {
           'code': r"""
           >>> roll_dice(3, make_test_dice(4, 6, 1))
-          43d176e102c8d95338faf8791aa509b3
-          # locked
+          1
           """,
           'hidden': False,
-          'locked': True,
+          'locked': False,
           'multiline': False
         },
         {
