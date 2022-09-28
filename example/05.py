@@ -36,6 +36,27 @@ c1 = compose1(square, triple)
 c2 = compose1(triple, make_adder(7))
 c3 = compose1(triple, square)
 
+# Self Reference
+def print_all(x):
+    print(x)
+    return print_all
 
+def print_sumall(x):
+    print(x)
+    def summall(k):
+        return print_sumall(k + x)
+    return summall
 
+# Currying
+from operator import add, mul 
 
+def curry2(f):
+    def h(x):
+        def g(y):
+            return f(x, y)
+        return g
+    return h
+
+m = curry2(compose1)
+a = m(triple)
+b = a(square)
