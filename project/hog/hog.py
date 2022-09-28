@@ -141,19 +141,18 @@ def play(strategy0, strategy1, score0=0, score1=0, dice=six_sided,
     while score0 < goal and score1 < goal:
         if who == 0:
             num_dice = strategy0(score0, score1)
-            turn_score = take_turn(num_dice, score1, dice, goal)
-            score0 += turn_score
+            score0 += take_turn(num_dice, score1, dice, goal)
             score0 += hog_pile(score0, score1)
         else:
             num_dice = strategy1(score1, score0)
-            turn_score = take_turn(num_dice, score0, dice, goal)
-            score1 += turn_score
+            score1 += take_turn(num_dice, score0, dice, goal)
             score1 += hog_pile(score1, score0)
         who = next_player(who)
     # END PROBLEM 5
     # (note that the indentation for the problem 6 prompt (***YOUR CODE HERE***) might be misleading)
     # BEGIN PROBLEM 6
     "*** YOUR CODE HERE ***"
+    
     # END PROBLEM 6
     return score0, score1
 
