@@ -1,3 +1,6 @@
+from msilib.schema import Condition
+
+
 def lambda_curry2(func):
     """
     Returns a Curried version of a two-argument function FUNC.
@@ -55,6 +58,15 @@ def count_cond(condition):
     8
     """
     "*** YOUR CODE HERE ***"
+    def Condition(n):
+        i = 1
+        count = 0
+        while i <= n:
+            if condition(n, i):
+                count += 1
+            i += 1
+        return count
+    return Condition
 
 
 def composer(f, g):
