@@ -1,7 +1,5 @@
 #Containers 
 
-from turtle import left
-
 def pair(a, b):
     def pair_func(which, v = None):
         nonlocal a, b

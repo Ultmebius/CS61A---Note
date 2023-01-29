@@ -1,19 +1,20 @@
 {
     "name": "Lab 4",
-    "endpoint": "cal/cs61a/fa22/lab04",
+    "endpoint": "cal/cs61a/sp22/lab04",
     "src": [
-        "lab04.py"
+        "lab04.py",
+        "parsons_probs/line_stepper.py"
     ],
     "tests": {
         "lab*.py": "doctest",
-        "tests/*.py": "ok_test"
+        "tests/*.py": "ok_test",
+        "parsons_probs/line_stepper.py:line_stepper": "doctest"
     },
     "default_tests": [
         "squared-virfib-wwpd",
         "summation",
-        "pascal",
         "paths",
-        "couple"
+        "line_stepper"
     ],
     "protocols": [
         "restore",
@@ -22,5 +23,12 @@
         "grading",
         "analytics",
         "backup"
-    ]
+    ],
+    "parsons": {
+        "pascal": {
+            "required": [
+                "line_stepper"
+            ]
+        }
+    }
 }
