@@ -83,6 +83,15 @@ def hefty_hogs(player_score, opponent_score):
     """
     # BEGIN PROBLEM 2
     "*** YOUR CODE HERE ***"
+    sum = digit_fn(opponent_score % 10)(player_score)
+    score = opponent_score // 10
+    if opponent_score == 0:
+        return 1
+    while score > 0:
+        sum = digit_fn(score % 10)(sum)
+        score = score // 10
+    sum = sum % 30
+    return sum
     # END PROBLEM 2
 
 
@@ -104,6 +113,10 @@ def take_turn(num_rolls, player_score, opponent_score, dice=six_sided, goal=GOAL
     assert max(player_score, opponent_score) < goal, 'The game should be over.'
     # BEGIN PROBLEM 3
     "*** YOUR CODE HERE ***"
+    if num_rolls == 0:
+        return hefty_hogs(player_score, opponent_score)
+    else:
+        return roll_dice(num_rolls, dice)
     # END PROBLEM 3
 
 
@@ -115,6 +128,9 @@ def hog_pile(player_score, opponent_score):
     """
     # BEGIN PROBLEM 4
     "*** YOUR CODE HERE ***"
+    if player_score % 10 == opponent_score % 10:
+        return player_score % 10
+    return 0
     # END PROBLEM 4
 
 
@@ -133,7 +149,7 @@ def silence(score0, score1, leader=None):
     """Announce nothing (see Phase 2)."""
     return leader, None
 
-
+#difficult
 def play(strategy0, strategy1, score0=0, score1=0, dice=six_sided,
          goal=GOAL_SCORE, say=silence):
     """Simulate a game and return the final scores of both players, with Player
@@ -155,10 +171,23 @@ def play(strategy0, strategy1, score0=0, score1=0, dice=six_sided,
     leader = None  # To be used in problem 7
     # BEGIN PROBLEM 5
     "*** YOUR CODE HERE ***"
+    i = 0
+    while score0 < goal and score1 < goal:
+        if next_player(i):
+            score0 += take_turn(strategy0(score0, score1), score0, score1, dice, goal)
+            score0 += hog_pile(score0, score1)
+            i = i + 1
+        else:
+            score1 += take_turn(strategy1(score1, score0), score1, score0, dice, goal)
+            score1 += hog_pile(score1, score0)
+            i = i - 1
     # END PROBLEM 5
     # (note that the indentation for the problem 7 prompt (***YOUR CODE HERE***) might be misleading)
     # BEGIN PROBLEM 7
-    "*** YOUR CODE HERE ***"
+    #"*** YOUR CODE HERE ***"
+        leader, message = say(score0, score1, leader)
+        if message != None:
+            print(message)
     # END PROBLEM 7
     return score0, score1
 
@@ -193,6 +222,24 @@ def announce_lead_changes(score0, score1, last_leader=None):
     """
     # BEGIN PROBLEM 6
     "*** YOUR CODE HERE ***"
+    if score0 > score1:
+        if 0 != last_leader:
+            message = f"Player 0 takes the lead by {score0 - score1}"
+        else:
+            message = None
+        last_leader = score0
+        return 0, message
+    if score1 > score0:
+        if 1 != last_leader:
+            message = f"Player 1 takes the lead by {score1 - score0}"
+        else:
+            message = None
+        last_leader = score1
+        return 1, message
+    else:
+        return None, None
+        
+        
     # END PROBLEM 6
 
 
@@ -259,6 +306,12 @@ def make_averaged(original_function, total_samples=1000):
     """
     # BEGIN PROBLEM 8
     "*** YOUR CODE HERE ***"
+    def make_averaged_return(*args):
+        sum = 0
+        for i in range(1, total_samples + 1):
+            sum += original_function(*args)
+        return sum / total_samples
+    return make_averaged_return
     # END PROBLEM 8
 
 
@@ -273,6 +326,16 @@ def max_scoring_num_rolls(dice=six_sided, total_samples=1000):
     """
     # BEGIN PROBLEM 9
     "*** YOUR CODE HERE ***"
+    average_dice = make_averaged(roll_dice, total_samples)
+    temp = 0
+    max = 0
+    a = 0
+    for i in range(1, 11):
+        max = temp
+        temp = average_dice(i, dice)
+        if temp > max:
+            a = i
+    return a
     # END PROBLEM 9
 
 
@@ -302,7 +365,7 @@ def run_experiments():
     print('always_roll(6) win rate:', average_win_rate(always_roll(6)))
 
     #print('always_roll(8) win rate:', average_win_rate(always_roll(8)))
-    #print('hefty_hogs_strategy win rate:', average_win_rate(hefty_hogs_strategy))
+    print('hefty_hogs_strategy win rate:', average_win_rate(hefty_hogs_strategy))
     print('hog_pile_strategy win rate:', average_win_rate(hog_pile_strategy))
     #print('final_strategy win rate:', average_win_rate(final_strategy))
     "*** You may add additional experiments as you wish ***"
@@ -313,7 +376,11 @@ def hefty_hogs_strategy(score, opponent_score, threshold=8, num_rolls=6):
     returns NUM_ROLLS otherwise.
     """
     # BEGIN PROBLEM 10
-    return 6  # Remove this line once implemented.
+    result = hefty_hogs(score, opponent_score)
+    if result >= threshold:
+        return 0
+    return num_rolls 
+    # Remove this line once implemented.
     # END PROBLEM 10
 
 
@@ -323,7 +390,13 @@ def hog_pile_strategy(score, opponent_score, threshold=8, num_rolls=6):
     Otherwise, it returns NUM_ROLLS.
     """
     # BEGIN PROBLEM 11
-    return 6  # Remove this line once implemented.
+    result = hefty_hogs(score, opponent_score)
+    if result >= threshold:
+        return 0
+    elif (result + score) % 10 == opponent_score % 10 and (result + score) % 10 != 0:
+        return 0
+    return num_rolls  
+    # Remove this line once implemented.
     # END PROBLEM 11
 
 
@@ -333,6 +406,13 @@ def final_strategy(score, opponent_score):
     *** YOUR DESCRIPTION HERE ***
     """
     # BEGIN PROBLEM 12
+    threshold = 8
+    for num_rolls in (6, 11):
+        result = roll_dice(num_rolls)
+        if hefty_hogs_strategy(score, opponent_score, threshold, num_rolls) == 0:
+            return 0
+        elif (result + score) % 10 == opponent_score % 10 and (result + score) % 10 != 0:
+            return num_rolls
     return 6  # Remove this line once implemented.
     # END PROBLEM 12
 
