@@ -33,3 +33,4 @@ def sum_squares_up_to(n):
         totlal, k = totlal + square(k), k + 1
     return totlal
 
+

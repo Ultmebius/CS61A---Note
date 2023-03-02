@@ -2,5 +2,6 @@
     "python.analysis.typeCheckingMode": "basic",
     "[python]": {
         "editor.formatOnType": true
-    }
+    },
+    "Codegeex.EnableExtension": true
 }
