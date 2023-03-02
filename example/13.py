@@ -59,3 +59,4 @@ def count_leaves(t):
         return 1
     else:
         return sum([count_leaves(b) for b in branches(t)])
+
