@@ -15,8 +15,17 @@ def flatten(s):
     [[1, [1, 1]], 1, [1, 1]]
     """
     "*** YOUR CODE HERE ***"
+    flattened = []
+    for b in s:
+      if type(b) == list:
+        flattened += flatten(b)
+      else:
+        flattened.append(b)
+    return flattened
+        
     
-
+x = [1, [2, 3], 4]
+flatten(x)
 
 from math import sqrt
 
@@ -33,6 +42,7 @@ def distance(city_a, city_b):
     5.0
     """
     "*** YOUR CODE HERE ***"
+    
 
 
 
@@ -52,6 +62,7 @@ def closer_city(lat, lon, city_a, city_b):
     'Bucharest'
     """
     "*** YOUR CODE HERE ***"
+    
 
 
 def check_city_abstraction():
