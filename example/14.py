@@ -11,7 +11,7 @@ str(freedom - today)
 today.year
 today.strftime('%A, %B, %d')
 type(today)
-    
+
 
 def string_demos():
     """
@@ -28,7 +28,7 @@ def string_demos():
     lookup('BABY')
     s = lookup('SNOWMAN')
     """
-    
+
 
 def list_demos():
     """   
@@ -59,7 +59,7 @@ def dict_demos():
     numerals.get('A', 0)
     numerals.get('V', 0)
     """
-    
+
 
 def tuple_demos():
     """   
