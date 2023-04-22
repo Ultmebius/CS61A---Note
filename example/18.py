@@ -92,6 +92,9 @@ class C(B):
     def f(self, x):
         return x
     
+a = A()
+
+b = B(1)
 
 def WWPD():
     """What would Python Display?
