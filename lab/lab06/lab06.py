@@ -95,4 +95,14 @@ def repeated(t, k):
     """
     assert k > 1
     "*** YOUR CODE HERE ***"
-    
+    n = next(t)
+    count = 1
+    for i in t:
+        if i == n:
+            count += 1
+            if count == k:
+                return i
+        else:
+            count = 1
+            n = i
+    return None
