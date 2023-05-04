@@ -30,6 +30,16 @@ def insert_items(lst, entry, elem):
     True
     """
     "*** YOUR CODE HERE ***"
+    i = 0
+    while i < len(lst):
+        if lst[i] == entry:
+            if i + 1 == len(lst):
+                lst.append(elem)
+            else:    
+                lst.insert(i + 1, elem)
+            i = i + 1
+        i = i + 1      
+    return lst
 
     
 
