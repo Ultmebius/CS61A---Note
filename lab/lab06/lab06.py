@@ -30,7 +30,7 @@ def insert_items(lst, entry, elem):
     True
     """
     "*** YOUR CODE HERE ***"
-    
+
     
 
 def count_occurrences(t, n, x):
