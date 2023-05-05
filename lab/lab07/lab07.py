@@ -1,3 +1,6 @@
+import re
+
+
 class Account:
     """An account has a balance and a holder.
     >>> a = Account('John')
@@ -39,6 +42,12 @@ class Account:
         """Return the number of years until balance would grow to amount."""
         assert self.balance > 0 and amount > 0 and self.interest > 0
         "*** YOUR CODE HERE ***"
+        i = 0
+        b = self.balance
+        while b < amount:
+            b += b * self.interest
+            i += 1
+        return i
 
 
 class FreeChecking(Account):
