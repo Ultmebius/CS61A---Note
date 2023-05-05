@@ -77,3 +77,8 @@ class FreeChecking(Account):
     free_withdrawals = 2
 
     "*** YOUR CODE HERE ***"
+    def withdraw(self, amount):
+        while self.free_withdrawals > 0:
+            self.free_withdrawals = self.free_withdrawals - 1
+            return super().withdraw(amount)
+        return super().withdraw(amount + self.withdraw_fee)
