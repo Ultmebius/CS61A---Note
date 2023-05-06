@@ -253,7 +253,7 @@ class TACard(Card):
         """
         "*** YOUR CODE HERE ***"
         best_card = None
-        if len(player.hand) > 1:
+        if len(player.hand) > 0 and [lambda x: x.cardtype == 'Staff' for i in player.hand if i.cardtype == 'Staff']:
             best_card = 1
             temp = player.hand[0].attack
             for i in range(len(player.hand)):
