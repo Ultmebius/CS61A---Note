@@ -35,4 +35,15 @@ class Bear:
     >>> print(repr_(oski))
     Bear()
     """
+    def __init__(self):
+        self.__repr__ = lambda:  'oski'
+        self.__str__ = lambda: 'oski the bear'
+        
+    def __repr__(self):
+        return 'Bear()'
+    
+    def __str__(self):
+        return 'a bear'
+    
+    
     
