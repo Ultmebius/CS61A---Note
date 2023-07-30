@@ -32,3 +32,10 @@ class Link:
     <1 <2 3> 4>
     """
     
+        
+    def __repr__(self):
+        if self.rest:
+            rest_repr = ', ' + repr(self.rest)
+        else:
+            rest_repr = ''
+        return 'Link(' + repr(self.first) + rest_repr + ')'
