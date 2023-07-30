@@ -1,5 +1,8 @@
 #composition
 
+from numpy import empty
+
+
 class Link:
     """A linked list.
 
@@ -31,7 +34,13 @@ class Link:
     >>> print(t)
     <1 <2 3> 4>
     """
+    empty = ()
     
+    def __init__(self, first, rest = empty):
+        assert rest is Link.empty or isinstance(rest, Link)
+        self.first = first
+        self.rest = rest
+        
         
     def __repr__(self):
         if self.rest:
