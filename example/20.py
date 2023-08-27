@@ -41,10 +41,24 @@ class Link:
         self.first = first
         self.rest = rest
         
-        
     def __repr__(self):
         if self.rest:
             rest_repr = ', ' + repr(self.rest)
         else:
             rest_repr = ''
         return 'Link(' + repr(self.first) + rest_repr + ')'
+    
+    def __str__(self):
+        string = '<'
+        while self.rest is not Link.empty:
+            string += str(self.first) + ' '
+            self = self.rest
+        return string + str(self.first) + '>'
+        
+
+square, odd = lambda x: x * x, lambda x: x % 2 == 1
+
+
+
+t = Link(1, Link(Link(2, Link(3)), Link(4)))
+print(repr(t))
