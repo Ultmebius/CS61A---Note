@@ -1,5 +1,6 @@
 #composition
 
+from re import L
 from numpy import empty
 
 
@@ -95,6 +96,74 @@ def filter_link(f, s):
     else:
         return filtered_rest
     
+def add(s, v):
+    """Add v to an ordered list s with no repeats, returning modified s.
+	(Note: If v is already in s, then don't modify s, but still return it.)
 
+    >>> s = Link(1, Link(3, Link(5)))
+    >>> add(s, 0)
+    Link(0, Link(1, Link(3, Link(5))))
+    >>> add(s, 3)
+    Link(0, Link(1, Link(3, Link(5))))
+    >>> add(s, 4)
+    Link(0, Link(1, Link(3, Link(4, Link(5)))))
+    >>> add(s, 6)
+    Link(0, Link(1, Link(3, Link(4, Link(5, Link(6))))))
+	"""
+    if s.first > v:
+        s.first, s.rest = v, Link(s.first, s.rest)
+    elif s.first < v and s.rest == Link.empty:
+        s.rest = Link(v)
+    elif s.first < v:
+        add(s.rest, v)
+    return s
+
+
+class Tree:
+    """A tree is a label and a list of branches."""
+    
+
+def fib_tree(n):
+    """A Fibonacci tree.
+
+    >>> print(fib_tree(4))
+    3
+      1
+        0
+        1
+      2
+        1
+        1
+          0
+          1
+    """
+    
+    
+def leaves(tree):
+    """Return the leaf labels of a tree.
+
+    >>> leaves(fib_tree(4))
+    [0, 1, 1, 0, 1]
+    """
+    
+    
+def height(tree):
+    """The height of a tree."""
+    
+    
+def prune(t, n):
+    """Prune each sub-tree whose root label is n.
+
+    >>> t = fib_tree(5)
+    >>> prune(t, 1)
+    >>> print(t)
+    5
+      2
+      3
+        2
+    """
+
+        
+ 
 t = Link(1, Link(Link(2, Link(3)), Link(4)))
 print(repr(t))
