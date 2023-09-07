@@ -122,6 +122,7 @@ def add(s, v):
 class Tree:
     """A tree is a label and a list of branches."""
     
+    
 
 def fib_tree(n):
     """A Fibonacci tree.
