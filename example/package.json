@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "less": "^4.2.0",
+    "nvm": "^0.0.4",
     "openai": "^3.2.1"
   }
 }
