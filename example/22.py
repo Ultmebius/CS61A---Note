@@ -45,7 +45,7 @@ class Restaurant:
         return sorted(others, key=lambda r: -similarity(self, r))[:k]
 
     def __repr__(self):
-        return "<" + self.name + ">"
+        return "<" + self.name + ">" #很重要
 
 
 import json
