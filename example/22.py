@@ -29,7 +29,7 @@ def fast_overlap(s, t):
 
 
 class Restaurant:
-    """all restaurant"""
+    """A restaurant."""
 
     all = []
 
@@ -44,8 +44,8 @@ class Restaurant:
         others.remove(self)
         return sorted(others, key=lambda r: -similarity(self, r))[:k]
 
-    def __repr__(self) -> str:
-        return "<" + r.name + ">"
+    def __repr__(self):
+        return "<" + self.name + ">"
 
 
 import json
