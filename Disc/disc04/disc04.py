@@ -72,3 +72,13 @@ def max_product(s):
         return 1
     else:
         return max(max_product(s[1:]), s[0]*max_product(s[2:])) #使用递归很简洁
+
+""" 
+Q6: WWPD: Dictionaries
+>>> pokemon[['firetype', 'flying']] = 146
+unhashable type
+
+Note that dictionaries cannot use other mutable data structures as keys. However, dictionaries can be arbitrarily deep, meaning the values of a dictionary can be themselves dictionaries.
+"""
+
+
