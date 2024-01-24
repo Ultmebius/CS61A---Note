@@ -41,4 +41,5 @@ def count_palindromes(L):
     >>> count_palindromes(["101", "rAcECaR", "much", "wow"])
     3
     """
-    return len([x for x in L if my_map(lambda a: a.lower(), x) == my_map(lambda a: a.lower(), x[::-1])])
+    return len([x for x in L if x.lower() == x[::-1].lower()])
+
