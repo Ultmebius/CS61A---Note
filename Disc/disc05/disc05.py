@@ -32,7 +32,7 @@ def my_reduce(combiner, seq):
         return seq[0]
     return combiner(seq[-1], my_reduce(combiner, seq[:-1]))
 
-#Q2: Count Palindromes
+# Q2: Count Palindromes
 def count_palindromes(L):
     """The number of palindromic strings in the sequence of strings
     L (ignoring case).
@@ -43,3 +43,49 @@ def count_palindromes(L):
     """
     return len([x for x in L if x.lower() == x[::-1].lower()])
 
+'''
+# Q3: Tree Abstraction Barrier
+
+# Consider a tree t constructed by calling tree(1, [tree(2), tree(4)]). 
+# For each of the following expressions, answer these two questions:
+# What does the expression evaluate to?
+# Does the expression violate any abstraction barriers? If so, write an equivalent expression that does not violate abstraction barriers.
+
+def tree(label, branches=[]):
+    """Construct a tree with the given label value and a list of branches."""
+    return [label] + list(branches)
+
+def label(tree):
+    """Return the label value of a tree."""
+    return tree[0]
+
+def branches(tree):
+    """Return the list of branches of the given tree."""
+    return tree[1:]
+
+def is_leaf(tree):
+    """Returns True if the given tree's list of branches is empty, and False
+    otherwise.
+    """
+    return not branches(tree)
+
+t = tree(1, [tree(2), tree(4)])
+
+>>> label(branches(t)[0])
+2
+# This expression evaluates to the label of the first branch of `t`.
+# It is not a violation to index into `branches(t)` because it is
+# given in the description of the ADT that `branches(t)` returns a
+# list of branches.
+
+>>> branches(tree(5, [t, tree(3)]))[0][0]
+1
+
+# This expression evaluates to the label of the tree `t`, which is 1.
+# This is because the expression `tree(5, [t, tree(3)])` evaluates to
+# a tree whose first branch is the tree `t` that we constructed above!
+# Howvever, this expression violates the abstraction barrier by
+# indexing into `t` to get its label. An equivalent expression would
+# be `label(branches(tree(5, [t, tree(3)]))[0])`.
+
+'''
