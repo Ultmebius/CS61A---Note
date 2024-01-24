@@ -31,4 +31,14 @@ def my_reduce(combiner, seq):
     if len(seq) == 1:
         return seq[0]
     return combiner(seq[-1], my_reduce(combiner, seq[:-1]))
-    
+
+#Q2: Count Palindromes
+def count_palindromes(L):
+    """The number of palindromic strings in the sequence of strings
+    L (ignoring case).
+    >>> count_palindromes(("Acme", "Madam", "Pivot", "Pip"))
+    2
+    >>> count_palindromes(["101", "rAcECaR", "much", "wow"])
+    3
+    """
+    return len([x for x in L if my_map(lambda a: a.lower(), x) == my_map(lambda a: a.lower(), x[::-1])])
