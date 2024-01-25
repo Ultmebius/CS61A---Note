@@ -125,9 +125,9 @@ def find_path(t, x):
     [2, 7, 6, 5]
     >>> find_path(t, 10)  # returns None
     """
-    if x not in t:
-        return None
-    for branch in t:
-        path = [label(t)] + [find_path(branches(t), x)]
-        if x == label(t):
-            return [label(t)]
+    if x == label(t):
+        return [label(t)]
+    for branch in branches(t):
+        path = find_path(branch, x)
+        if path:
+            return [label(t)] + path #不会
