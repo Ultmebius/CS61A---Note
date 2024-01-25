@@ -43,14 +43,6 @@ def count_palindromes(L):
     """
     return len([x for x in L if x.lower() == x[::-1].lower()])
 
-'''
-# Q3: Tree Abstraction Barrier
-
-# Consider a tree t constructed by calling tree(1, [tree(2), tree(4)]). 
-# For each of the following expressions, answer these two questions:
-# What does the expression evaluate to?
-# Does the expression violate any abstraction barriers? If so, write an equivalent expression that does not violate abstraction barriers.
-
 def tree(label, branches=[]):
     """Construct a tree with the given label value and a list of branches."""
     return [label] + list(branches)
@@ -68,6 +60,14 @@ def is_leaf(tree):
     otherwise.
     """
     return not branches(tree)
+
+'''
+# Q3: Tree Abstraction Barrier
+
+# Consider a tree t constructed by calling tree(1, [tree(2), tree(4)]). 
+# For each of the following expressions, answer these two questions:
+# What does the expression evaluate to?
+# Does the expression violate any abstraction barriers? If so, write an equivalent expression that does not violate abstraction barriers.
 
 t = tree(1, [tree(2), tree(4)])
 
@@ -87,5 +87,47 @@ t = tree(1, [tree(2), tree(4)])
 # Howvever, this expression violates the abstraction barrier by
 # indexing into `t` to get its label. An equivalent expression would
 # be `label(branches(tree(5, [t, tree(3)]))[0])`.
-
 '''
+
+def height(t):
+    """Return the height of a tree.
+
+    >>> t = tree(3, [tree(5, [tree(1)]), tree(2)])
+    >>> height(t)
+    2
+    >>> t = tree(3, [tree(1), tree(2, [tree(5, [tree(6)]), tree(1)])])
+    >>> height(t)
+    3
+    """
+    "*** YOUR CODE HERE ***"
+    if is_leaf(t):
+        return 0
+    else:
+        return 1 + max([height(branch) for branch in branches(t)])
+
+def max_path_sum(t):
+    """Return the maximum path sum of the tree.
+
+    >>> t = tree(1, [tree(5, [tree(1), tree(3)]), tree(10)])
+    >>> max_path_sum(t)
+    11
+    """
+    "*** YOUR CODE HERE ***"
+    if is_leaf(t):
+        return label(t)
+    else:
+        return max([label(t) + max_path_sum(branch) for branch in branches(t)])
+
+def find_path(t, x):
+    """
+    >>> t = tree(2, [tree(7, [tree(3), tree(6, [tree(5), tree(11)])] ), tree(15)])
+    >>> find_path(t, 5)
+    [2, 7, 6, 5]
+    >>> find_path(t, 10)  # returns None
+    """
+    if x not in t:
+        return None
+    for branch in t:
+        path = [label(t)] + [find_path(branches(t), x)]
+        if x == label(t):
+            return [label(t)]
