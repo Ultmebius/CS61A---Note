@@ -189,8 +189,17 @@ def sphinx_swaps(start, goal, limit):
     5
     """
     # BEGIN PROBLEM 6
-    assert False, 'Remove this line'
-    
+    i, l = 0, limit
+    if i == min(len(goal), len(start)):
+        return abs(len(goal) - len(start)) 
+    elif limit < 0:
+        return l + 1
+    else:
+        i += 1
+        if start[0] != goal[0]:
+            return 1 + sphinx_swaps(start[i:], goal[i:], limit - 1)
+        else:
+            return 0 + sphinx_swaps(start[i:], goal[i:], limit)
     # END PROBLEM 6
 
 
