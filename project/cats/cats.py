@@ -31,6 +31,10 @@ def choose(paragraphs, select, k):
     """
     # BEGIN PROBLEM 1
     "*** YOUR CODE HERE ***"
+    selecting = [s for s in paragraphs if select(s)]
+    if k >= len(selecting):
+        return ''
+    return selecting[k]
     # END PROBLEM 1
 
 
@@ -50,6 +54,7 @@ def about(topic):
     assert all([lower(x) == x for x in topic]), 'topics should be lowercase.'
     # BEGIN PROBLEM 2
     "*** YOUR CODE HERE ***"
+    
     # END PROBLEM 2
 
 
