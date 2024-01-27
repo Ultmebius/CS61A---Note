@@ -154,15 +154,15 @@ def autocorrect(typed_word, word_list, diff_function, limit):
     """
     # BEGIN PROBLEM 5
     "*** YOUR CODE HERE ***"
-    dic = {}
+    dic = []
     for word in word_list:
         if typed_word == word:
             return typed_word
-        elif diff_function(typed_word, word, limit) > limit:
-            return typed_word
         else:
-            dic[word] = diff_function(typed_word, word, limit)
-    return min(dic, key=dic.get) # type: ignore
+            dic += [diff_function(typed_word, word, limit)]
+    if min(dic) > limit:
+            return typed_word
+    return word_list[dic.index(min(dic))]
     # END PROBLEM 5
 
 
