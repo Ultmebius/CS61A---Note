@@ -154,6 +154,7 @@ def autocorrect(typed_word, word_list, diff_function, limit):
     """
     # BEGIN PROBLEM 5
     "*** YOUR CODE HERE ***"
+    
     # END PROBLEM 5
 
 
