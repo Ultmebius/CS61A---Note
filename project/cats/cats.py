@@ -154,8 +154,16 @@ def autocorrect(typed_word, word_list, diff_function, limit):
     """
     # BEGIN PROBLEM 5
     "*** YOUR CODE HERE ***"
-    
+    dic = {}
+    for word in word_list:
+        if diff_function(typed_word, word, limit) > limit:
+            return typed_word
+        else:
+            dic[word] = diff_function(typed_word, word, limit)
+    return min(dic, key=dic.get)
     # END PROBLEM 5
+first_diff = lambda w1, w2, limit: 1 if w1[0] != w2[0] else 0
+autocorrect("wrod", ["word", "rod"], first_diff, 1)
 
 
 def sphinx_swaps(start, goal, limit):
