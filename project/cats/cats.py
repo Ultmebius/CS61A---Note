@@ -55,14 +55,16 @@ def about(topic):
     # BEGIN PROBLEM 2
     "*** YOUR CODE HERE ***"
     def contain(paragraph):
-        handle_p = [lower(remove_punctuation(paragraph))]
         for w in topic:
-            if len(handle_p) == 1:
-                if w in handle_p:
+            if not isinstance(paragraph, list): #先区分是不是列表，列表无法使用.split方法
+                handle_para = lower(remove_punctuation(paragraph)).split()
+                if w in handle_para:
                     return True
-            for p in handle_p:
-                if w in p:
-                    return True
+            else:
+                for p in paragraph:
+                    handle_p = lower(remove_punctuation(p)).split()
+                    if w in handle_p:
+                        return True
         return False
     return contain
     # END PROBLEM 2
@@ -95,6 +97,17 @@ def accuracy(typed, reference):
     reference_words = split(reference)
     # BEGIN PROBLEM 3
     "*** YOUR CODE HERE ***"
+    count_correct = 0
+    i = 0
+    if typed == '' and reference == '': #先and再or。'' = ""
+        return 100.0
+    elif typed == '' or reference == '':
+        return 0.0
+    while i < min(len(typed_words), len(reference_words)):
+        if typed_words[i] == reference_words[i]:
+            count_correct += 1
+        i += 1
+    return count_correct/len(typed_words) *100 #百分数要再乘100哦
     # END PROBLEM 3
 
 
