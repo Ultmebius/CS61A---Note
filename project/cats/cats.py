@@ -54,7 +54,17 @@ def about(topic):
     assert all([lower(x) == x for x in topic]), 'topics should be lowercase.'
     # BEGIN PROBLEM 2
     "*** YOUR CODE HERE ***"
-    
+    def contain(paragraph):
+        handle_p = [lower(remove_punctuation(paragraph))]
+        for w in topic:
+            if len(handle_p) == 1:
+                if w in handle_p:
+                    return True
+            for p in handle_p:
+                if w in p:
+                    return True
+        return False
+    return contain
     # END PROBLEM 2
 
 
