@@ -1,5 +1,6 @@
 """Typing test implementation"""
 
+from os import remove
 from utils import lower, split, remove_punctuation, lines_from_file
 from ucb import main, interact, trace
 from datetime import datetime
@@ -197,7 +198,7 @@ def sphinx_swaps(start, goal, limit):
     else:
         i += 1
         if start[0] != goal[0]:
-            return 1 + sphinx_swaps(start[i:], goal[i:], limit - 1)
+            return 1 + sphinx_swaps(start[i:], goal[i:], limit-1)
         else:
             return 0 + sphinx_swaps(start[i:], goal[i:], limit)
     # END PROBLEM 6
@@ -220,24 +221,29 @@ def minimum_mewtations(start, goal, limit):
     >>> minimum_mewtations("ckiteus", "kittens", big_limit) # ckiteus -> kiteus -> kitteus -> kittens
     3
     """
-    assert False, 'Remove this line'
-
-    if ______________:  # Fill in the condition
+    l = limit
+    if len(start) == 0 or len(goal) == 0:  # Fill in the condition
         # BEGIN
         "*** YOUR CODE HERE ***"
+        return len(start) + len(goal)
         # END
 
-    elif ___________:  # Feel free to remove or add additional cases
+    elif limit < 0:  # Feel free to remove or add additional cases
         # BEGIN
         "*** YOUR CODE HERE ***"
+        return l + 1
         # END
 
+    elif start[0] == goal[0]:
+        return minimum_mewtations(start[1:], goal[1:], limit)
+    
     else:
-        add = ...  # Fill in these lines
-        remove = ...
-        substitute = ...
+        add = minimum_mewtations(start, goal[1:], limit-1)
+        remove = minimum_mewtations(start[1:], goal, limit-1)
+        substitute = minimum_mewtations(start[1:], goal[1:], limit-1)
         # BEGIN
         "*** YOUR CODE HERE ***"
+        return 1 + min(add, remove, substitute)
         # END
 
 
