@@ -159,7 +159,7 @@ def autocorrect(typed_word, word_list, diff_function, limit):
         if typed_word == word:
             return typed_word
         else:
-            dic += [diff_function(typed_word, word, limit)]
+            dic += [diff_function(typed_word, word, limit)] #list只能和list相加
     if min(dic) > limit: #审题，最小差值大于limit返回typed_word。并且如果 typed_word 包含在 word_list 中，那么 autocorrect 将返回该单词。
             return typed_word
     return word_list[dic.index(min(dic))]
