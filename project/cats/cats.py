@@ -286,6 +286,16 @@ def report_progress(sofar, prompt, user_id, upload):
     """
     # BEGIN PROBLEM 8
     "*** YOUR CODE HERE ***"
+    i = 0
+    while i < len(sofar):
+        if sofar[i] != prompt[i]:
+            upload({'id': user_id, 'progress': i/len(prompt)})
+            return i/len(prompt)
+        i += 1
+    if len(sofar) <= len(prompt):
+        upload({'id': user_id, 'progress': len(sofar)/len(prompt)})
+        return len(sofar)/len(prompt)
+        
     # END PROBLEM 8
 
 
@@ -308,6 +318,11 @@ def time_per_word(words, times_per_player):
     """
     # BEGIN PROBLEM 9
     "*** YOUR CODE HERE ***"
+    times = []
+    for t in times_per_player:
+        time = [t[i + 1] - t[i] for i in range(len(t) - 1)]
+        times += [time] #list of lists，所以要相加前把已经是列表的time再[]上
+    return match(words, times)
     # END PROBLEM 9
 
 
@@ -330,6 +345,7 @@ def fastest_words(match):
     word_indices = range(len(match["words"]))    # contains an *index* for each word
     # BEGIN PROBLEM 10
     "*** YOUR CODE HERE ***"
+    
     # END PROBLEM 10
 
 
