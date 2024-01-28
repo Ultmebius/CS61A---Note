@@ -345,7 +345,18 @@ def fastest_words(match):
     word_indices = range(len(match["words"]))    # contains an *index* for each word
     # BEGIN PROBLEM 10
     "*** YOUR CODE HERE ***"
-    
+    #按顺序对比words里每个单词哪个玩家最快
+    #把单词和最快玩家绑定
+    #组合成一个列表，返回列表
+    fast_m_b = [i for i in word_indices]
+    fast_m_l = []
+    for i in word_indices:
+        min_i = min([time(match, p, i) for p in player_indices])
+        fast_p = min([p for p in player_indices if time(match, p, i) == min_i])
+        fast_m_b[i] = fast_p #list不像字典，用这个操作记得提前初始化列表，[i]里的i不能超范围
+    for i in player_indices:
+        fast_m_l += [[word_at(match, w) for w in word_indices if i == fast_m_b[w]]] #相加可以不用提前初始化
+    return fast_m_l
     # END PROBLEM 10
 
 
